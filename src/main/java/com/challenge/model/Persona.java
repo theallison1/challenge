@@ -1,6 +1,6 @@
 package com.challenge.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +9,12 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 @Entity
-@Data
-public class Persona implements Serializable {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;

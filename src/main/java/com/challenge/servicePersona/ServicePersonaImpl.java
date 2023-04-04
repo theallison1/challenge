@@ -20,9 +20,9 @@ public class ServicePersonaImpl implements ServicePersona {
     Logger logger = LoggerFactory.getLogger(ServicePersona.class);
 
     @Override
-    public List<Optional> listarPersonas() {
+    public List<Persona> listarPersonas() {
 
-        List<Optional> listaPersona = repositoryPersona.findAllPerson();
+        List<Persona> listaPersona = repositoryPersona.findAll();
         if (listaPersona.isEmpty()) {
             System.out.println("no existen persona");
         }

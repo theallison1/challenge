@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ServicePersona {
-    public List<Optional> listarPersonas();
+    public List<Persona> listarPersonas();
     public ResponseEntity<ResponseDtoPersona> crearPersona(Persona persona);
     public Persona actualizarPersona(Long idPesona);
     public ResponseDtoPersona eliminarPersona(Long idPersona);

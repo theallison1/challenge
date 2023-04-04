@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface RepositoryPersona extends JpaRepository<Persona,Long> {
-    List<Optional> findAllPerson();
+
 }
