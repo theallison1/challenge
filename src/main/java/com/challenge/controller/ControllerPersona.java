@@ -1,6 +1,6 @@
 package com.challenge.controller;
 
-import com.challenge.dto.ResponseDtoPersona;
+import com.challenge.dto.RequestDtoPersona;
 import com.challenge.model.Persona;
 import com.challenge.servicePersona.ServicePersonaImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/persona")
 public class ControllerPersona {
 
     @Autowired
     ServicePersonaImpl servicePersona;
+
     @PostMapping("/crear")
-    public ResponseEntity<ResponseDtoPersona> crearPersona(@Valid @RequestBody Persona persona) {
+    public ResponseEntity<String> crearPersona(@Valid @RequestBody RequestDtoPersona persona) {
         return servicePersona.crearPersona(persona);
     }
 
@@ -28,5 +30,12 @@ public class ControllerPersona {
        return servicePersona.listarPersonas();
 
     }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String>  borrarPersona(@NotBlank @PathVariable Long id) {
 
+        return servicePersona.eliminarPersona(id);
+
+
+
+    }
 }
