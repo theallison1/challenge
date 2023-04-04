@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,14 +21,19 @@ public class ServicePersonaImpl implements ServicePersona {
     Logger logger = LoggerFactory.getLogger(ServicePersona.class);
 
     @Override
-    public List<Persona> listarPersonas() {
+    public ResponseEntity<List<Persona>> listarPersonas() {
+        List<Persona> listaPersona = new ArrayList<Persona>();
+        try {
+           listaPersona = repositoryPersona.findAll();
 
-        List<Persona> listaPersona = repositoryPersona.findAll();
-        if (listaPersona.isEmpty()) {
-            System.out.println("no existen persona");
+
+        }catch (Exception ex){
+            logger.error(ex.getMessage());
         }
 
-        return listaPersona;
+        return  ResponseEntity.status(HttpStatus.OK).body(listaPersona);
+
+
     }
 
     @Override

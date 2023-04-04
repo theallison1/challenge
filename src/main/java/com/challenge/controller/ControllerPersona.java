@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -19,6 +20,13 @@ public class ControllerPersona {
     @PostMapping("/crear")
     public ResponseEntity<ResponseDtoPersona> crearPersona(@Valid @RequestBody Persona persona) {
         return servicePersona.crearPersona(persona);
+    }
+
+    @GetMapping("/listarPersonas")
+    public ResponseEntity<List<Persona>> listarPersonas() {
+
+       return servicePersona.listarPersonas();
+
     }
 
 }
