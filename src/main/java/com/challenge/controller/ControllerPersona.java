@@ -1,7 +1,9 @@
 package com.challenge.controller;
 
 import com.challenge.dto.RequestDtoPersona;
+import com.challenge.dto.ResponseDtoEstadisticas;
 import com.challenge.model.Persona;
+import com.challenge.servicePersona.ServiceEstadisticas;
 import com.challenge.servicePersona.ServicePersona;
 import com.challenge.servicePersona.ServicePersonaImpl;
 import org.slf4j.Logger;
@@ -23,6 +25,8 @@ public class ControllerPersona {
 
     @Autowired
     ServicePersonaImpl servicePersona;
+    @Autowired
+    ServiceEstadisticas serviceEstadisticas;
     Logger logger = LoggerFactory.getLogger(ControllerPersona.class);
 
     @PostMapping("/crear")
@@ -48,5 +52,12 @@ public class ControllerPersona {
     public ResponseEntity<String> updatePersona(@RequestBody RequestDtoPersona person, @PathVariable("id") Long id ) {
         return   servicePersona.actualizarPersona(id,person);
 
+    }   @GetMapping("/estadisticas")
+    public ResponseEntity<ResponseDtoEstadisticas> listar() {
+
+        return serviceEstadisticas.cantidadHombres();
+
     }
+
+
 }
