@@ -2,7 +2,6 @@ package com.challenge.dto;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class RequestDtoPersona {
     @NotNull
@@ -21,6 +20,13 @@ public class RequestDtoPersona {
     private String nacionalidad;
     @NotNull
     private LocalDate fechaNac;
+    private String email;
+    private String telefono;
+
+
+
+
+
 
     public String getNombre() {
         return nombre;
@@ -84,5 +90,21 @@ public class RequestDtoPersona {
 
     public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

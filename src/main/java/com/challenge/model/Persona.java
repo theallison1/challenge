@@ -1,21 +1,23 @@
 package com.challenge.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "persona")
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +38,11 @@ public class Persona {
     private String nacionalidad;
     @NotNull
     private LocalDate fechaNac;
+    private String email;
+    private String telefono;
+
+
+
 
 
     public static class PersonaBuilder{
@@ -48,6 +55,10 @@ public class Persona {
         private String paisNac;
         private String nacionalidad;
         private LocalDate fechaNac;
+        private String email;
+        private String telefono;
+
+
 
 
 
@@ -100,6 +111,16 @@ public class Persona {
             return this;
         }
 
+        public PersonaBuilder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public PersonaBuilder setTelefono(String telefono) {
+            this.telefono = telefono;
+            return this;
+        }
+
         public Persona build() {
             return new Persona( this);
         }
@@ -118,6 +139,25 @@ public class Persona {
         this.paisNac = personaBuilder.paisNac;
         this.nacionalidad = personaBuilder.nacionalidad;
         this.fechaNac = personaBuilder.fechaNac;
+        this.email= personaBuilder.email;
+        this.telefono= personaBuilder.telefono;
+
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public Long getId() {
@@ -191,4 +231,6 @@ public class Persona {
     public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
     }
+
+
 }

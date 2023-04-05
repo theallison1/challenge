@@ -53,11 +53,13 @@ public class ServicePersonaImpl implements ServicePersona {
 
             if (persoExist.isPresent()) {
                 stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("La persona ya existe , no puede ser creada nuevamente");
-            } else {
+            } else if(tieneDatoContacto(persona)) {
                 Persona persona1 = repositoryPersona.save(buildPersonaToRequestPersona(persona));
                 stringResponseEntity = ResponseEntity.status(HttpStatus.OK).body("La persona con dni :" + persona1.getNumeroDoc()
                         + " fue creada con exito");
                 logger.info("la persona con dni Nº :" + persona.getNumeroDoc() + " se creo exitosamente");
+            }else {
+                stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("Debe tener al menos un dato de contacto , email o telefono!!");
             }
         } else {
             stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("La persona debe ser mayor a 18 años para poder crearse");
@@ -68,18 +70,23 @@ public class ServicePersonaImpl implements ServicePersona {
     }
 
     @Override
-    public ResponseEntity<String> actualizarPersona(Long idPesona,RequestDtoPersona requestDtoPersona) {
+    public ResponseEntity<String> actualizarPersona(Long idPesona, RequestDtoPersona requestDtoPersona) {
         ResponseEntity<String> stringResponseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-            Optional<Persona> persona=repositoryPersona.findById(idPesona);
-            if (persona.isPresent()){
+        Optional<Persona> persona = repositoryPersona.findById(idPesona);
+        if (persona.isPresent()) {
+            if (tieneDatoContacto(requestDtoPersona)){
                 Persona personaUpdate = buildPersonaToRequestPersona(requestDtoPersona);
                 personaUpdate.setId(idPesona);
                 repositoryPersona.save(personaUpdate);
                 stringResponseEntity = ResponseEntity.status(HttpStatus.OK).body("La persona fue actualizada correctamente ");
                 logger.info("la persona  se actualizo exitosamente");
-            }else{
-                stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("La persona no se encontro !");
+            }else {
+                stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("Debe tener al menos un dato de contacto , email o telefono!!");
             }
+
+        } else {
+            stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("La persona no se encontro !");
+        }
         return stringResponseEntity;
     }
 
@@ -104,17 +111,17 @@ public class ServicePersonaImpl implements ServicePersona {
 
     private Persona buildPersonaToRequestPersona(RequestDtoPersona requestDtoPersona) {
         Persona persona = new Persona.PersonaBuilder()
-                .setNombre(requestDtoPersona.getNombre())
-                .setPaisNac(requestDtoPersona.getPaisNac())
-                .setNumeroDoc(requestDtoPersona.getNumeroDoc())
-                .setApellido(requestDtoPersona.getApellido())
-                .setFechaNac(requestDtoPersona.getFechaNac())
-                .setSexo(requestDtoPersona.getSexo())
+                .nombre(requestDtoPersona.getNombre())
+                .paisNac(requestDtoPersona.getPaisNac())
+                .numeroDoc(requestDtoPersona.getNumeroDoc())
+                .apellido(requestDtoPersona.getApellido())
+                .fechaNac(requestDtoPersona.getFechaNac())
+                .sexo(requestDtoPersona.getSexo())
                 .nacionalidad(requestDtoPersona.getNacionalidad())
-                .setTipoDoc(requestDtoPersona.getTipoDoc())
+                .tipoDoc(requestDtoPersona.getTipoDoc())
+                .email(requestDtoPersona.getEmail())
+                .telefono(requestDtoPersona.getTelefono())
                 .build();
-
-
         return persona;
     }
 
@@ -130,5 +137,14 @@ public class ServicePersonaImpl implements ServicePersona {
             mayor = true;
         }
         return mayor;
+    }
+    private Boolean tieneDatoContacto(RequestDtoPersona requestDtoPersona){
+        Boolean datosContacto = false;
+        if (requestDtoPersona.getTelefono()!=null&& requestDtoPersona.getEmail()!=null&&
+            !requestDtoPersona.getTelefono().equals("")&& !requestDtoPersona.getEmail().equals("")){
+            datosContacto=true;
+
+        }
+        return datosContacto;
     }
 }

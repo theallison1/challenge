@@ -26,12 +26,8 @@ public class ControllerPersona {
     Logger logger = LoggerFactory.getLogger(ControllerPersona.class);
 
     @PostMapping("/crear")
-    public ResponseEntity<String> crearPersona(@Valid @RequestBody RequestDtoPersona persona, Errors errors) {
-        logger.info("Endpoint crear persona ejecutandose....");
-        if (errors.hasErrors()) {
-            logger.error("faltan datos en los siguientes campos " +errors.getFieldError().toString());
-            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear persona!!! todos los campos son obligatorios");
-        }
+    public ResponseEntity<String> crearPersona(@Valid @RequestBody RequestDtoPersona persona) {
+
         return servicePersona.crearPersona(persona);
     }
 
