@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Getter
@@ -34,7 +35,7 @@ public class Persona {
     @NotNull
     private String nacionalidad;
     @NotNull
-    private Date fechaNac;
+    private LocalDate fechaNac;
 
 
     public static class PersonaBuilder{
@@ -46,7 +47,7 @@ public class Persona {
         private String sexo;
         private String paisNac;
         private String nacionalidad;
-        private Date fechaNac;
+        private LocalDate fechaNac;
 
 
 
@@ -94,7 +95,7 @@ public class Persona {
             return this;
         }
 
-        public PersonaBuilder setFechaNac(Date fechaNac) {
+        public PersonaBuilder setFechaNac(LocalDate fechaNac) {
             this.fechaNac = fechaNac;
             return this;
         }
@@ -183,11 +184,11 @@ public class Persona {
         this.nacionalidad = nacionalidad;
     }
 
-    public Date getFechaNac() {
+    public LocalDate getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(Date fechaNac) {
+    public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
     }
 }

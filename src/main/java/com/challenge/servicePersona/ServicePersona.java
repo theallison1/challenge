@@ -13,6 +13,6 @@ public interface ServicePersona {
 
     ResponseEntity<String> crearPersona(RequestDtoPersona persona);
 
-    public Persona actualizarPersona(Long idPesona);
+    public ResponseEntity<String> actualizarPersona(Long idPesona,RequestDtoPersona requestDtoPersona);
     public ResponseEntity<String>   eliminarPersona(Long idPersona);
 }

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,24 +45,42 @@ public class ServicePersonaImpl implements ServicePersona {
 
     @Override
     public ResponseEntity<String> crearPersona(RequestDtoPersona persona) {
-        //buscar por dni si existe la persona
-        Optional<Persona> persoExist = repositoryPersona.findByDni(persona.getNumeroDoc());
+
         ResponseEntity<String> stringResponseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-        if (persoExist.isPresent()) {
-            stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("La persona ya existe , no puede ser creada nuevamente");
-        }else{
-            Persona persona1 = repositoryPersona.save(buildPersonaToRequestPersona(persona));
-            stringResponseEntity = ResponseEntity.status(HttpStatus.OK).body("La persona con dni :" + persona1.getNumeroDoc()
-                    + " fue creada con exito");
-            logger.info("la persona con dni Nº :" + persona.getNumeroDoc() + " se creo exitosamente");
+        if (esMayor(persona.getFechaNac())) {
+            //buscar por dni si existe la persona
+            Optional<Persona> persoExist = repositoryPersona.findByDni(persona.getNumeroDoc());
+
+            if (persoExist.isPresent()) {
+                stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("La persona ya existe , no puede ser creada nuevamente");
+            } else {
+                Persona persona1 = repositoryPersona.save(buildPersonaToRequestPersona(persona));
+                stringResponseEntity = ResponseEntity.status(HttpStatus.OK).body("La persona con dni :" + persona1.getNumeroDoc()
+                        + " fue creada con exito");
+                logger.info("la persona con dni Nº :" + persona.getNumeroDoc() + " se creo exitosamente");
+            }
+        } else {
+            stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("La persona debe ser mayor a 18 años para poder crearse");
         }
+
 
         return stringResponseEntity;
     }
 
     @Override
-    public Persona actualizarPersona(Long idPesona) {
-        return null;
+    public ResponseEntity<String> actualizarPersona(Long idPesona,RequestDtoPersona requestDtoPersona) {
+        ResponseEntity<String> stringResponseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            Optional<Persona> persona=repositoryPersona.findById(idPesona);
+            if (persona.isPresent()){
+                Persona personaUpdate = buildPersonaToRequestPersona(requestDtoPersona);
+                personaUpdate.setId(idPesona);
+                repositoryPersona.save(personaUpdate);
+                stringResponseEntity = ResponseEntity.status(HttpStatus.OK).body("La persona fue actualizada correctamente ");
+                logger.info("la persona  se actualizo exitosamente");
+            }else{
+                stringResponseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("La persona no se encontro !");
+            }
+        return stringResponseEntity;
     }
 
     @Override
@@ -81,8 +101,9 @@ public class ServicePersonaImpl implements ServicePersona {
 
         return personaEliminada;
     }
-    private Persona buildPersonaToRequestPersona(RequestDtoPersona requestDtoPersona){
-        Persona persona= new Persona.PersonaBuilder()
+
+    private Persona buildPersonaToRequestPersona(RequestDtoPersona requestDtoPersona) {
+        Persona persona = new Persona.PersonaBuilder()
                 .setNombre(requestDtoPersona.getNombre())
                 .setPaisNac(requestDtoPersona.getPaisNac())
                 .setNumeroDoc(requestDtoPersona.getNumeroDoc())
@@ -95,5 +116,19 @@ public class ServicePersonaImpl implements ServicePersona {
 
 
         return persona;
+    }
+
+    private Boolean esMayor(LocalDate fechaNac1) {
+        Boolean mayor = false;
+
+        LocalDate ahora = LocalDate.now();
+
+        Period periodo = Period.between(fechaNac1, ahora);
+        System.out.printf("Tu edad es: %s años, %s meses y %s días",
+                periodo.getYears(), periodo.getMonths(), periodo.getDays());
+        if (periodo.getYears() >= 18) {
+            mayor = true;
+        }
+        return mayor;
     }
 }
