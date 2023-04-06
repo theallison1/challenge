@@ -1,12 +1,10 @@
-package com.challenge.servicePersona;
+package com.challenge.service;
 
 import com.challenge.dto.RequestDtoPersona;
-import com.challenge.dto.ResponseDtoPersona;
 import com.challenge.model.Persona;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ServicePersona {
     public ResponseEntity<List<Persona>> listarPersonas();

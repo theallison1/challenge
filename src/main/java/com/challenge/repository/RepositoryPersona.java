@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface RepositoryPersona extends JpaRepository<Persona,Long> {
-    @Query("SELECT p FROM Persona p WHERE p.numeroDoc = ?1 ")
+    @Query("SELECT p FROM Persona p WHERE p.numeroDoc = ?1  ")
     Optional<Persona>findByDni(String dni);
     @Query("SELECT count(*) FROM Persona Where sexo like '%hombre%'")
     int findCantidadHombres();

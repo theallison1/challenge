@@ -3,15 +3,12 @@ package com.challenge.controller;
 import com.challenge.dto.RequestDtoPersona;
 import com.challenge.dto.ResponseDtoEstadisticas;
 import com.challenge.model.Persona;
-import com.challenge.servicePersona.ServiceEstadisticas;
-import com.challenge.servicePersona.ServicePersona;
-import com.challenge.servicePersona.ServicePersonaImpl;
+import com.challenge.service.ServiceEstadisticas;
+import com.challenge.service.ServicePersonaImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

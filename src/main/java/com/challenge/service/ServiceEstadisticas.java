@@ -1,4 +1,4 @@
-package com.challenge.servicePersona;
+package com.challenge.service;
 
 import com.challenge.dto.ResponseDtoEstadisticas;
 import com.challenge.repository.RepositoryPersona;
