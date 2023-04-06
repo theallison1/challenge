@@ -8,4 +8,47 @@ SE NECESITA
   EN LA VERSION 8.0.32
 .MAVEN 
     HERRAMIENTA DE GESTION DE DEPENDENCIAS Y COMPILACION.
-  
+    
+    
+#endpoints para pruebas una vez que el proyecto corre
+ESTADISTICAS ENDPOINT
+#http://localhost:8080/persona/estadisticas GET
+CREAR ENDPOINT  
+#http://localhost:8080/persona/crear  POST
+ejemplo de BODY
+{
+    
+    "nombre":"juanca",
+    "apellido":"123456",
+    "tipoDoc":"dni",
+    "numeroDoc":"3519937",
+    "sexo":"hombre",
+    "paisNac":"arge",
+    "nacionalidad":"argentino",
+    "fechaNac":"1991-01-18 ",
+    "email":"nico.gmail.com",
+    "telefono":"444"
+    
+}
+ELIMINAR ENDPOINT
+#http://localhost:8080/persona/eliminar/{id}
+LISTAR ENDPOINT
+#http://localhost:8080/persona/listarPersonas
+ACTUALIZAR ENDPOINT
+#http://localhost:8080/persona/actualizar/{id}
+ejemplo de persona en el body a actualizar
+{
+    
+    "nombre":"juanca",
+    "apellido":"123456",
+    "tipoDoc":"dni",
+    "numeroDoc":"3519937",
+    "sexo":"hombre",
+    "paisNac":"arge",
+    "nacionalidad":"argentino",
+    "fechaNac":"1991-01-18 ",
+    "email":"nico.gmail.com",
+    "telefono":"444"
+    
+}
+
