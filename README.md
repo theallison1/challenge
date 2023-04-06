@@ -1,15 +1,15 @@
 # challenge
 PARA EJECUTAR ESTA APLICACION
 SE NECESITA 
-.JAVA 11
-.SPRING BOOT VERSION 2.7.10
-.PARA LA BASE DE DATOS
+#.JAVA 11
+#.SPRING BOOT VERSION 2.7.10
+#.PARA LA BASE DE DATOS
   EL CONECTOR MYSQL EN ESTE CASO  
   EN LA VERSION 8.0.32
-.MAVEN 
+#MAVEN 
     HERRAMIENTA DE GESTION DE DEPENDENCIAS Y COMPILACION.
     
-    
+#http://localhost:8080/swagger-ui/index.html#/    
 #endpoints para pruebas una vez que el proyecto corre
 ESTADISTICAS ENDPOINT
 #http://localhost:8080/persona/estadisticas GET
