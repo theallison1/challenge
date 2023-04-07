@@ -23,7 +23,7 @@ public class ControllerRelaciones {
         return serviceRelaciones.guardarRelaciones(id1,vinculo,id2);
     }
     @GetMapping("/relaciones/{id}")
-    public ResponseEntity<String> listarRelaciones(@PathVariable String id) {
+    public ResponseEntity<?> listarRelaciones(@PathVariable String id) {
 
         return serviceRelaciones.mostrarRelaciones(id);
 
