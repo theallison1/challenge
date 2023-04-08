@@ -47,19 +47,22 @@ public class ServiceRelaciones {
         ResponseEntity<?> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         if (personaRelaciones2.isEmpty() && personaRelaciones.isEmpty()) {
-            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
+            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("debe indicar un id para listar relaciones!cl");
         } else if (!personaRelaciones.isEmpty() && personaRelaciones2.isEmpty()) {
 
             listaRelaciones = buildLisResponse(personaRelaciones, true);
+            response = ResponseEntity.status(HttpStatus.OK).body(listaRelaciones);
 
         } else if (personaRelaciones.isEmpty() ) {
             listaRelaciones = buildLisResponse(personaRelaciones2, false);
+            response = ResponseEntity.status(HttpStatus.OK).body(listaRelaciones);
 
         } else {
             listaRelaciones=buildLisResponseComplete(personaRelaciones,personaRelaciones2);
+            response = ResponseEntity.status(HttpStatus.OK).body(listaRelaciones);
         }
 
-        response = ResponseEntity.status(HttpStatus.OK).body(listaRelaciones);
+
         return response;
     }
 
