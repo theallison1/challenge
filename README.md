@@ -30,11 +30,11 @@ ejemplo de BODY
     "telefono":"444"
     
 }
-ELIMINAR ENDPOINT
+ELIMINAR ENDPOINT /n
 #http://localhost:8080/persona/eliminar/{id}
-LISTAR ENDPOINT
+LISTAR ENDPOINT /n
 #http://localhost:8080/persona/listarPersonas
-ACTUALIZAR ENDPOINT
+ACTUALIZAR ENDPOINT /n
 #http://localhost:8080/persona/actualizar/{id}
 ejemplo de persona en el body a actualizar
 {
