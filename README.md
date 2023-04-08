@@ -54,3 +54,13 @@ ejemplo de persona en el body a actualizar
     
 }
 
+ENDPOINT DE RELACIONES
+  para crear las relaciones
+.#http://localhost:8080/personas/{id1}/vinculos/{vinculo}/{id2}
+
+para ver la o las relaciones 
+.#http://localhost:8080/relaciones/{id}
+
+
+
+
