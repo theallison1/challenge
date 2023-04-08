@@ -9,6 +9,14 @@ SE NECESITA
 #MAVEN 
     HERRAMIENTA DE GESTION DE DEPENDENCIAS Y COMPILACION.
     
+    
+
+*   [Resumen](#resumen)
+    *   [Filosofía](#filosofía)
+    *   [HTML en línea](#html-en-línea)
+    *   [Escape automático para Caracteres Especiales](#escape-automático-para-caracteres-especiales)     
+    
+    
 #http://localhost:8080/swagger-ui/index.html#/    
 #endpoints para pruebas una vez que el proyecto corre
 ESTADISTICAS ENDPOINT
