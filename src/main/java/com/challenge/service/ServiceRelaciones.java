@@ -37,7 +37,7 @@ public class ServiceRelaciones {
         return response;
     }
 
-    public ResponseEntity<?>  mostrarRelaciones(String id) {
+    public ResponseEntity<?> mostrarRelaciones(String id) {
 
         List<PersonaRelaciones> personaRelaciones = repositoryRelaciones.findByPersona1(id);
         List<PersonaRelaciones> personaRelaciones2 = repositoryRelaciones.findByPersona2(id);
@@ -46,52 +46,17 @@ public class ServiceRelaciones {
 
         ResponseEntity<?> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        if (personaRelaciones2.isEmpty() &&  personaRelaciones.isEmpty()) {
-            response = (ResponseEntity<?>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
-        } else if (!personaRelaciones.isEmpty()) {
+        if (personaRelaciones2.isEmpty() && personaRelaciones.isEmpty()) {
+            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
+        } else if (!personaRelaciones.isEmpty() && personaRelaciones2.isEmpty()) {
 
-            for (PersonaRelaciones p : personaRelaciones) {
-                RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
-                relacionesPersonaDtoResponse.seteTipoRelaciones(p.geteTipoRelaciones());
-                relacionesPersonaDtoResponse.setPersona1(p.getPersona1());
-                relacionesPersonaDtoResponse.setPersona2(p.getPersona2());
-                listaRelaciones.add(relacionesPersonaDtoResponse);
+            listaRelaciones = buildLisResponse(personaRelaciones, true);
 
-            }
+        } else if (personaRelaciones.isEmpty() && !personaRelaciones2.isEmpty()) {
+            listaRelaciones = buildLisResponse(personaRelaciones2, false);
 
-
-
-
-        } else  if (!personaRelaciones2.isEmpty()) {
-            for (PersonaRelaciones p : personaRelaciones2) {
-                RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
-                relacionesPersonaDtoResponse.seteTipoRelaciones(validarRelaciones(p.geteTipoRelaciones()));
-                relacionesPersonaDtoResponse.setPersona1(p.getPersona2());
-                relacionesPersonaDtoResponse.setPersona2(p.getPersona1());
-                listaRelaciones.add(relacionesPersonaDtoResponse);
-            }
-
-
-
-
-        }else {
-            for (PersonaRelaciones p : personaRelaciones2) {
-                RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
-                relacionesPersonaDtoResponse.seteTipoRelaciones(validarRelaciones(p.geteTipoRelaciones()));
-                relacionesPersonaDtoResponse.setPersona1(p.getPersona1());
-                relacionesPersonaDtoResponse.setPersona2(p.getPersona2());
-                listaRelaciones.add(relacionesPersonaDtoResponse);
-            }
-            for (PersonaRelaciones p : personaRelaciones) {
-                RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
-                relacionesPersonaDtoResponse.seteTipoRelaciones(p.geteTipoRelaciones());
-                relacionesPersonaDtoResponse.setPersona1(p.getPersona1());
-                relacionesPersonaDtoResponse.setPersona2(p.getPersona2());
-                listaRelaciones.add(relacionesPersonaDtoResponse);
-
-            }
-
-
+        } else {
+            listaRelaciones=buildLisResponseComplete(personaRelaciones,personaRelaciones2);
         }
 
         response = ResponseEntity.status(HttpStatus.OK).body(listaRelaciones);
@@ -125,16 +90,56 @@ public class ServiceRelaciones {
 
     private Boolean validatorPersonaById(String id) {
         Optional<Persona> personaToFind = findById(Long.valueOf(id));
-        Boolean response = false;
-        if (personaToFind.isPresent()) {
-            response = true;
-        }
-        return response;
+        return personaToFind.isPresent();
     }
 
     private Optional<Persona> findById(Long id) {
-        return repositoryPersona.findById(Long.valueOf(id));
+        return repositoryPersona.findById(id);
     }
 
+    private Set<RelacionesPersonaDtoResponse> buildLisResponse(List<PersonaRelaciones> list, boolean flag) {
+
+        Set<RelacionesPersonaDtoResponse> listaRelaciones = new HashSet<>();
+        for (PersonaRelaciones p : list) {
+            RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
+
+            if (flag) {
+                relacionesPersonaDtoResponse.seteTipoRelaciones(p.geteTipoRelaciones());
+                relacionesPersonaDtoResponse.setPersona1(p.getPersona1());
+                relacionesPersonaDtoResponse.setPersona2(p.getPersona2());
+            } else {
+                relacionesPersonaDtoResponse.seteTipoRelaciones(validarRelaciones(p.geteTipoRelaciones()));
+                relacionesPersonaDtoResponse.setPersona1(p.getPersona2());
+                relacionesPersonaDtoResponse.setPersona2(p.getPersona1());
+            }
+            listaRelaciones.add(relacionesPersonaDtoResponse);
+
+        }
+        return listaRelaciones;
+    }
+
+    private Set<RelacionesPersonaDtoResponse> buildLisResponseComplete(List<PersonaRelaciones> list,List<PersonaRelaciones> list2) {
+
+        Set<RelacionesPersonaDtoResponse> listaRelaciones = new HashSet<>();
+        for (PersonaRelaciones p : list) {
+            RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
+            relacionesPersonaDtoResponse.seteTipoRelaciones(p.geteTipoRelaciones());
+            relacionesPersonaDtoResponse.setPersona1(p.getPersona1());
+            relacionesPersonaDtoResponse.setPersona2(p.getPersona2());
+
+            listaRelaciones.add(relacionesPersonaDtoResponse);
+
+        }
+        for (PersonaRelaciones p : list2) {
+            RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
+            relacionesPersonaDtoResponse.seteTipoRelaciones(validarRelaciones(p.geteTipoRelaciones()));
+            relacionesPersonaDtoResponse.setPersona1(p.getPersona2());
+            relacionesPersonaDtoResponse.setPersona2(p.getPersona1());
+
+            listaRelaciones.add(relacionesPersonaDtoResponse);
+
+        }
+        return listaRelaciones;
+    }
 }
 
