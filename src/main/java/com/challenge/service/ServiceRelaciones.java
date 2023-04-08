@@ -31,7 +31,7 @@ public class ServiceRelaciones {
 
             repositoryRelaciones.save(buildPersonaRela(id1, eTipoRelaciones, id2));
             response = ResponseEntity.status(HttpStatus.OK).body("se guardo bien la relacion entre el id 1 :" + id1
-                    + "/n la persona con id :" + id2 + "/n y la relacion es: " + eTipoRelaciones);
+                    + "y la persona con id :" + id2 + "  la relacion es: " + eTipoRelaciones);
         }
 
         return response;
@@ -52,7 +52,7 @@ public class ServiceRelaciones {
 
             listaRelaciones = buildLisResponse(personaRelaciones, true);
 
-        } else if (personaRelaciones.isEmpty() && !personaRelaciones2.isEmpty()) {
+        } else if (personaRelaciones.isEmpty() ) {
             listaRelaciones = buildLisResponse(personaRelaciones2, false);
 
         } else {
