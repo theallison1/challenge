@@ -47,7 +47,7 @@ public class ServiceRelaciones {
         ResponseEntity<?> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         if (personaRelaciones2.isEmpty() && personaRelaciones.isEmpty()) {
-            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("debe indicar un id para listar relaciones!cl");
+            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("debe indicar un id valido para listar relaciones!");
         } else if (!personaRelaciones.isEmpty() && personaRelaciones2.isEmpty()) {
 
             listaRelaciones = buildLisResponse(personaRelaciones, true);
