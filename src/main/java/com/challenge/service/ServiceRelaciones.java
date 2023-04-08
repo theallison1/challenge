@@ -22,7 +22,7 @@ public class ServiceRelaciones {
     RepositoryPersona repositoryPersona;
 
     public ResponseEntity<String> guardarRelaciones(String id1, String eTipoRelaciones, String id2) {
-        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<String> response ;
         if (!validatorPersonaById(id1)) {
             response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("la persona que intenta relacionar con el id :" + id1 + " no existe");
         } else if (!validatorPersonaById(id2)) {
@@ -42,9 +42,9 @@ public class ServiceRelaciones {
         List<PersonaRelaciones> personaRelaciones = repositoryRelaciones.findByPersona1(id);
         List<PersonaRelaciones> personaRelaciones2 = repositoryRelaciones.findByPersona2(id);
 
-        Set<RelacionesPersonaDtoResponse> listaRelaciones = new HashSet<>();
+        Set<RelacionesPersonaDtoResponse> listaRelaciones ;
 
-        ResponseEntity<?> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<?> response ;
 
         if (personaRelaciones2.isEmpty() && personaRelaciones.isEmpty()) {
             response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("debe indicar un id valido para listar relaciones!");
