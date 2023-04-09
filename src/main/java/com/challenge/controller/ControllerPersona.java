@@ -5,8 +5,6 @@ import com.challenge.dto.ResponseDtoEstadisticas;
 import com.challenge.model.Persona;
 import com.challenge.service.ServiceEstadisticas;
 import com.challenge.service.ServicePersonaImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +22,7 @@ public class ControllerPersona {
     ServicePersonaImpl servicePersona;
     @Autowired
     ServiceEstadisticas serviceEstadisticas;
-    Logger logger = LoggerFactory.getLogger(ControllerPersona.class);
+
 
     @PostMapping("/crear")
     public ResponseEntity<String> crearPersona(@Valid @RequestBody RequestDtoPersona persona) {

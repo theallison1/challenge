@@ -42,7 +42,7 @@ public class ServiceRelaciones {
         List<PersonaRelaciones> personaRelaciones = repositoryRelaciones.findByPersona1(id);
         List<PersonaRelaciones> personaRelaciones2 = repositoryRelaciones.findByPersona2(id);
 
-        Set<RelacionesPersonaDtoResponse> listaRelaciones ;
+        List<RelacionesPersonaDtoResponse> listaRelaciones ;
 
         ResponseEntity<?> response ;
 
@@ -93,6 +93,8 @@ public class ServiceRelaciones {
 
     private Boolean validatorPersonaById(String id) {
         Optional<Persona> personaToFind = findById(Long.valueOf(id));
+
+
         return personaToFind.isPresent();
     }
 
@@ -100,9 +102,9 @@ public class ServiceRelaciones {
         return repositoryPersona.findById(id);
     }
 
-    private Set<RelacionesPersonaDtoResponse> buildLisResponse(List<PersonaRelaciones> list, boolean flag) {
+    private List<RelacionesPersonaDtoResponse> buildLisResponse(List<PersonaRelaciones> list, boolean flag) {
 
-        Set<RelacionesPersonaDtoResponse> listaRelaciones = new HashSet<>();
+        List<RelacionesPersonaDtoResponse> listaRelaciones = new ArrayList<RelacionesPersonaDtoResponse>();
         for (PersonaRelaciones p : list) {
             RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
 
@@ -121,9 +123,9 @@ public class ServiceRelaciones {
         return listaRelaciones;
     }
 
-    private Set<RelacionesPersonaDtoResponse> buildLisResponseComplete(List<PersonaRelaciones> list,List<PersonaRelaciones> list2) {
+    private List<RelacionesPersonaDtoResponse> buildLisResponseComplete(List<PersonaRelaciones> list,List<PersonaRelaciones> list2) {
 
-        Set<RelacionesPersonaDtoResponse> listaRelaciones = new HashSet<>();
+        List<RelacionesPersonaDtoResponse> listaRelaciones = new ArrayList<RelacionesPersonaDtoResponse>();
         for (PersonaRelaciones p : list) {
             RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
             relacionesPersonaDtoResponse.seteTipoRelaciones(p.geteTipoRelaciones());

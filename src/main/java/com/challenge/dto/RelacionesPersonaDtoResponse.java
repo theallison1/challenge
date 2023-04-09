@@ -8,12 +8,18 @@ public class RelacionesPersonaDtoResponse {
 
 
 
+
+
+    public void setPersona1(String persona1) {
+        this.persona1 = persona1;
+    }
+
     public String getPersona1() {
         return persona1;
     }
 
-    public void setPersona1(String persona1) {
-        this.persona1 = persona1;
+    public String geteTipoRelaciones() {
+        return eTipoRelaciones;
     }
 
     public String getPersona2() {
@@ -24,9 +30,7 @@ public class RelacionesPersonaDtoResponse {
         this.persona2 = persona2;
     }
 
-    public String geteTipoRelaciones() {
-        return eTipoRelaciones;
-    }
+
 
     public void seteTipoRelaciones(String eTipoRelaciones) {
         this.eTipoRelaciones = eTipoRelaciones;
