@@ -2,6 +2,7 @@ package com.challenge.controller;
 
 import com.challenge.dto.RequestDtoPersona;
 import com.challenge.dto.ResponseDtoEstadisticas;
+import com.challenge.dto.ResponseDtoPersona;
 import com.challenge.model.Persona;
 import com.challenge.service.ServiceEstadisticas;
 import com.challenge.service.ServicePersonaImpl;
@@ -34,6 +35,12 @@ public class ControllerPersona {
     public ResponseEntity<List<Persona>> listarPersonas() {
 
        return servicePersona.listarPersonas();
+
+    }
+    @GetMapping("/buscarPersona/{id}")
+    public ResponseEntity<?> buscarPersona(@PathVariable Long id) {
+
+        return servicePersona.buscarPersonaById(id);
 
     }
     @DeleteMapping("/eliminar/{id}")

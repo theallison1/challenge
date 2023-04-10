@@ -11,6 +11,7 @@ public interface ServicePersona {
 
     ResponseEntity<String> crearPersona(RequestDtoPersona persona);
 
-    public ResponseEntity<String> actualizarPersona(Long idPesona,RequestDtoPersona requestDtoPersona);
+    public ResponseEntity<String> actualizarPersona(Long idPersona,RequestDtoPersona requestDtoPersona);
     public ResponseEntity<String>   eliminarPersona(Long idPersona);
+    public ResponseEntity<?> buscarPersonaById(Long id) ;
 }

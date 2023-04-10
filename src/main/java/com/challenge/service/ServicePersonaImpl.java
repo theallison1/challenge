@@ -1,6 +1,7 @@
 package com.challenge.service;
 
 import com.challenge.dto.RequestDtoPersona;
+import com.challenge.dto.ResponseDtoPersona;
 import com.challenge.model.Persona;
 import com.challenge.repository.RepositoryPersona;
 import org.slf4j.Logger;
@@ -109,8 +110,25 @@ public class ServicePersonaImpl implements ServicePersona {
         return personaEliminada;
     }
 
+    @Override
+    public ResponseEntity<?> buscarPersonaById(Long id) {
+        Optional<Persona> persona =repositoryPersona.findById(id);
+        ResponseEntity<?> response;
+        if (persona.isPresent()){
+            response=ResponseEntity.status(HttpStatus.OK).body(buildREsponseDtoPersona(persona.get()));
+        }else {
+            response= ResponseEntity.status(HttpStatus.BAD_REQUEST).body("la persona no existe");
+        }
+        return response;
+    }
+
+    private ResponseDtoPersona buildREsponseDtoPersona(Persona persona){
+        ResponseDtoPersona responseDtoPersona = new ResponseDtoPersona(persona.getNombre(), persona.getApellido());
+        return responseDtoPersona;
+    }
+
     private Persona buildPersonaToRequestPersona(RequestDtoPersona requestDtoPersona) {
-        Persona persona = new Persona.PersonaBuilder()
+        return new Persona.PersonaBuilder()
                 .nombre(requestDtoPersona.getNombre())
                 .paisNac(requestDtoPersona.getPaisNac())
                 .numeroDoc(requestDtoPersona.getNumeroDoc())
@@ -122,7 +140,6 @@ public class ServicePersonaImpl implements ServicePersona {
                 .email(requestDtoPersona.getEmail())
                 .telefono(requestDtoPersona.getTelefono())
                 .build();
-        return persona;
     }
 
     private Boolean esMayor(LocalDate fechaNac1) {
