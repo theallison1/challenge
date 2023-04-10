@@ -93,9 +93,7 @@ public class ServiceRelaciones {
 
     private Boolean validatorPersonaById(String id) {
         Optional<Persona> personaToFind = findById(Long.valueOf(id));
-
-
-        return personaToFind.isPresent();
+                return personaToFind.isPresent();
     }
 
     private Optional<Persona> findById(Long id) {
@@ -104,7 +102,7 @@ public class ServiceRelaciones {
 
     private List<RelacionesPersonaDtoResponse> buildLisResponse(List<PersonaRelaciones> list, boolean flag) {
 
-        List<RelacionesPersonaDtoResponse> listaRelaciones = new ArrayList<RelacionesPersonaDtoResponse>();
+        List<RelacionesPersonaDtoResponse> listaRelaciones = new ArrayList<>();
         for (PersonaRelaciones p : list) {
             RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
 
@@ -125,7 +123,7 @@ public class ServiceRelaciones {
 
     private List<RelacionesPersonaDtoResponse> buildLisResponseComplete(List<PersonaRelaciones> list,List<PersonaRelaciones> list2) {
 
-        List<RelacionesPersonaDtoResponse> listaRelaciones = new ArrayList<RelacionesPersonaDtoResponse>();
+        List<RelacionesPersonaDtoResponse> listaRelaciones = new ArrayList<>();
         for (PersonaRelaciones p : list) {
             RelacionesPersonaDtoResponse relacionesPersonaDtoResponse = new RelacionesPersonaDtoResponse();
             relacionesPersonaDtoResponse.seteTipoRelaciones(p.geteTipoRelaciones());
