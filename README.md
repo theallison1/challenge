@@ -32,7 +32,7 @@ ejemplo de BODY
     "telefono":"444"
     
 }<br>
-*ELIMINAR ENDPOINT 
+*ELIMINAR ENDPOINT <br>
 *#http://localhost:8080/persona/eliminar/{id}<br>
 
 *LISTAR ENDPOINT <br>
