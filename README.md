@@ -13,7 +13,7 @@ SE NECESITA <br>
     
 *#http://localhost:8080/swagger-ui/index.html#/    
 *#endpoints para pruebas una vez que el proyecto corre<br>
-*ESTADISTICAS ENDPOINT
+*ESTADISTICAS ENDPOINT<br>
 *#http://localhost:8080/persona/estadisticas GET<br>
 *CREAR ENDPOINT  
 *#http://localhost:8080/persona/crear  POST
@@ -35,11 +35,11 @@ ejemplo de BODY
 *ELIMINAR ENDPOINT 
 *#http://localhost:8080/persona/eliminar/{id}<br>
 
-*LISTAR ENDPOINT 
+*LISTAR ENDPOINT <br>
 *#http://localhost:8080/persona/listarPersonas<br>
-*BUSCAR PERSONA POR {ID} ENDPOINT 
+*BUSCAR PERSONA POR {ID} ENDPOINT <br>
 *#http://localhost:8080/persona/buscarPersona/{id}<br>
-*ACTUALIZAR ENDPOINT 
+*ACTUALIZAR ENDPOINT <br>
 *#http://localhost:8080/persona/actualizar/{id}
 ejemplo de persona en el body a actualizar
 {
@@ -58,10 +58,10 @@ ejemplo de persona en el body a actualizar
 }
 <br>
 ENDPOINT DE RELACIONES
-  para crear las relaciones
+  para crear las relaciones<br>
 .#http://localhost:8080/personas/{id1}/vinculos/{vinculo}/{id2}<br>
 
-para ver la o las relaciones 
+para ver la o las relaciones <br>
 .#http://localhost:8080/relaciones/{id}
 
 
