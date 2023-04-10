@@ -1,20 +1,20 @@
 # challenge
 PARA EJECUTAR ESTA APLICACION
-SE NECESITA 
-*#.JAVA 11
-*#.SPRING BOOT VERSION 2.7.10
-*#.PARA LA BASE DE DATOS
+SE NECESITA <br>
+*#.JAVA 11<br>
+*#.SPRING BOOT VERSION 2.7.10 <br>
+*#.PARA LA BASE DE DATOS <br>
   EL CONECTOR MYSQL EN ESTE CASO  
-  EN LA VERSION 8.0.32
+  EN LA VERSION 8.0.32 <br>
 *#MAVEN 
-    HERRAMIENTA DE GESTION DE DEPENDENCIAS Y COMPILACION.
+    HERRAMIENTA DE GESTION DE DEPENDENCIAS Y COMPILACION.<br>
     
 
     
 *#http://localhost:8080/swagger-ui/index.html#/    
-*#endpoints para pruebas una vez que el proyecto corre
+*#endpoints para pruebas una vez que el proyecto corre<br>
 *ESTADISTICAS ENDPOINT
-*#http://localhost:8080/persona/estadisticas GET
+*#http://localhost:8080/persona/estadisticas GET<br>
 *CREAR ENDPOINT  
 *#http://localhost:8080/persona/crear  POST
 ejemplo de BODY
@@ -31,11 +31,14 @@ ejemplo de BODY
     "email":"nico.gmail.com",
     "telefono":"444"
     
-}
+}<br>
 *ELIMINAR ENDPOINT 
-*#http://localhost:8080/persona/eliminar/{id}
+*#http://localhost:8080/persona/eliminar/{id}<br>
+
 *LISTAR ENDPOINT 
-*#http://localhost:8080/persona/listarPersonas
+*#http://localhost:8080/persona/listarPersonas<br>
+*BUSCAR PERSONA POR {ID} ENDPOINT 
+*#http://localhost:8080/persona/buscarPersona/{id}<br>
 *ACTUALIZAR ENDPOINT 
 *#http://localhost:8080/persona/actualizar/{id}
 ejemplo de persona en el body a actualizar
@@ -53,10 +56,10 @@ ejemplo de persona en el body a actualizar
     "telefono":"444"
     
 }
-
+<br>
 ENDPOINT DE RELACIONES
   para crear las relaciones
-.#http://localhost:8080/personas/{id1}/vinculos/{vinculo}/{id2}
+.#http://localhost:8080/personas/{id1}/vinculos/{vinculo}/{id2}<br>
 
 para ver la o las relaciones 
 .#http://localhost:8080/relaciones/{id}
